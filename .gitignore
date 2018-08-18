@@ -102,6 +102,7 @@ Makefile\.am\.user
 # CLion files
 *.iml
 cmake-build-debug/
+.idea/
 
 # CMake generated stuff
 src/clientversion.h
