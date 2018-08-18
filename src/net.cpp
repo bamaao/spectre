@@ -1088,9 +1088,9 @@ void ThreadSocketHandler()
 // hidden service seeds
 static const char *strMainNetOnionSeed[][1] = {
 // project-maintained nodes
-    {"qe6swgcfktc5l3l7.onion"},
-	{"6f3czb57puvm4si3.onion"},
-	{"j5tnnelwfsop3rsa.onion"},
+    {"zhn7wjfhk232kkmb.onion"},
+	{"qe6swgcfktc5l3l7.onion"},
+	{"r5mk35ekwr6j7ccb.onion"},
 
 // other stable nodes that are monitored by the project
     {NULL}
@@ -1566,7 +1566,7 @@ bool BindListenPort(const CService &addrBind, string& strError)
     {
         int nErr = WSAGetLastError();
         if (nErr == WSAEADDRINUSE)
-            strError = strprintf(_("Unable to bind to %s on this computer. SpectreCoin is probably already running."), addrBind.ToString());
+            strError = strprintf(_("Unable to bind to %s on this computer. Spectrecoin is probably already running."), addrBind.ToString());
         else
             strError = strprintf(_("Unable to bind to %s on this computer (bind returned error %d, %s)"), addrBind.ToString(), nErr, strerror(nErr));
         LogPrintf("%s\n", strError);
