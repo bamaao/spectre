@@ -94,10 +94,10 @@ Cross-compiling for Windows is supported using MingW64, by passing the appropria
 
 ### Using Docker
 
-This repository contains a Dockerfile to create a ready to use image with 
-spectrecoind. The image is based on our spectre base image [hlxeasy/spectre-base](https://github.com/HLXEasy/spectre-base)
-and so the dedicated user _spectre_ with UID _1000_ and GID _1000_ is used to run
-spectrecoind.
+This repository contains a Dockerfile to create a ready to use image with spectrecoind. The image is based on our 
+spectre base image [spectreproject/spectre-base](https://github.com/spectrecoin/spectre-base), which is based on 
+Debian on his side. A dedicated user _spectre_ with UID _1000_ and GID _1000_ is used to run [spectrecoind](https://github.com/spectrecoin/spectre).
+
 
 #### Start new container
 You should prepare a directory on the host machine, which contains all 
@@ -109,18 +109,22 @@ Explanation of start command:
 
 ```
 docker run \
-    --name <name> \          # Name of the container to create
-    --rm \                   # Container will automatically be removed after stop
-    -it \                    # Start in interactive mode with a virtual terminal
+    --name <name> \                 # Name of the container to create
+    --rm \                          # Container will automatically be removed after stop
+    -it \                           # Start in interactive mode with a virtual terminal
     -v <local-path>:/home/spectre/.spectrecoin/ \ # Mapping of local data folder into the container
-    -d \                     # Run in daemon mode
-    hlxeasy/spectre:latest   # Image to use
+    -d \                            # Run in daemon mode
+    spectreproject/spectre:latest   # Image to use
 ```
+
+**IMPORTANT: You must use option _'-v...'_ to mount a host folder into the container, if you use option _'--rm'_! 
+Otherwise you might loose your wallet, if the container is stopped!**
+
 
 To start the container just use
 
 ```
-docker run --name spectre --rm -it -v ~/.spectrecoin/:/home/spectre/.spectrecoin/ -d hlxeasy/spectre:latest
+docker run --name spectre --rm -it -v ~/.spectrecoin/:/home/spectre/.spectrecoin/ -d spectreproject/spectre:latest
 ```
 
 #### Stop container
@@ -149,7 +153,7 @@ docker rm spectre
 
 #### Build image yourself
 ```
-docker build -t hlxeasy/spectre:latest .
+docker build -t spectreproject/spectre:latest .
 ```
 
 #### Using more than one core
@@ -157,6 +161,7 @@ If multiple cores available for build, you can pass the amount of cores
 to use to the build command:
 
 ```
-docker build -t hlxeasy/spectre:latest --build-arg BUILD_THREADS=6 .
+docker build -t spectreproject/spectre:latest --build-arg BUILD_THREADS=12 .
 ```
 
+Default value is BUILD_THREADS=6
